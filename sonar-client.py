@@ -4,14 +4,13 @@ import datetime
 
 from influxdb import InfluxDBClient
 
-BASE_URL = 'http://local.dev:9000'
+BASE_URL = os.getenv('SONAR_BASE_URL', 'http://local.dev:9000')
 USER = os.environ['SONAR_USER']
-PASSWORD = os.environ['SONAR_PASSWORD']
-INFLUX_URL = 'local.dev'
+PASSWORD = os.getenv('SONAR_PASSWORD', '')
+INFLUX_URL = os.getenv('INFLUX_URL', ''local.dev')
 INFLUX_USER = os.environ['INFLUX_USER']
 INFLUX_PASSWORD = os.environ['INFLUX_PASSWORD']
 INFLUX_DB = os.environ['INFLUX_DB']
-
 
 class SonarApiClient:
 
