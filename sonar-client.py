@@ -37,7 +37,9 @@ class SonarApiClient:
         data = self._make_request(endpoint)
         metrics = []
         for metric in data['metrics']:
-            metrics.append(metric['key'])
+            if metric['type'] in ['BOOL','INT','MILLISEC','WORK_DUR','FLOAT','PERCENT','RATING']:
+                metrics.append(metric['key'])
+				
         return metrics
     
     def get_measures_by_component_id(self, endpoint):
