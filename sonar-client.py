@@ -37,7 +37,7 @@ class SonarApiClient:
         data = self._make_request(endpoint)
         metrics = []
         for metric in data['metrics']:
-            if metric['type'] in ['BOOL','INT','MILLISEC','WORK_DUR','FLOAT','PERCENT','RATING']:
+            if metric['type'] in ['INT','MILLISEC','WORK_DUR','FLOAT','PERCENT','RATING']:
                 metrics.append(metric['key'])
 				
         return metrics
@@ -79,7 +79,7 @@ class Project:
                 },
                 "time": self.timestamp,
                 "fields": {
-                    "value": metric['value'] if ('value' in metric) else 0
+                    "value": float(metric['value'] if ('value' in metric) else 0)
                 }
             }
             json_to_export.append(one_metric)
